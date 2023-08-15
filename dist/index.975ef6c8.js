@@ -592,24 +592,60 @@ var _imagePngDefault = parcelHelpers.interopDefault(_imagePng);
 const model = [
     {
         type: "title",
-        value: "Hello World!"
+        value: "Простой конструктор сайтов на JavaScript",
+        options: {
+            tag: "h2",
+            styles: {
+                background: "linear-gradient(to right, #ff0099, #493240)",
+                color: "#fff",
+                padding: "1.5rem",
+                "text-align": "center"
+            }
+        }
+    },
+    {
+        type: "image",
+        value: (0, _imagePngDefault.default),
+        options: {
+            styles: {
+                padding: "2rem 0",
+                display: "flex",
+                "justify-content": "center"
+            },
+            imageStyes: {
+                width: "500px",
+                height: "auto"
+            },
+            alt: "Это картинка"
+        }
     },
     {
         type: "text",
-        value: "Some text"
+        value: "Маленькие шажки к успеху на пути Frontend-разработчика",
+        options: {
+            styles: {
+                background: "linear-gradient(to left, #f2994a, #f2c94c)",
+                padding: "1rem",
+                "font-weight": "bold",
+                "text-align": "center"
+            }
+        }
     },
     {
         type: "columns",
         value: [
-            "111111",
-            "222222",
-            "333333",
-            "444444"
-        ]
-    },
-    {
-        type: "image",
-        value: (0, _imagePngDefault.default)
+            "Приложение на чистом JavaScript, без использования библеотек",
+            "Используются принципы SOLID и ООП в JavaScript",
+            "JavaScript - это просто и интересно. Можно создавать любые UI своими руками"
+        ],
+        options: {
+            styles: {
+                background: "linear-gradient(to bottom, #8e2de2, #4a00e0)",
+                padding: "2rem",
+                color: "#fff",
+                "font-weight": "bold"
+            }
+        }
     }
 ];
 
@@ -687,17 +723,19 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "templates", ()=>templates);
 var _utils = require("./utils");
 function title(block) {
-    return (0, _utils.row)((0, _utils.col)(`<h1>${block.value}</h1>`));
+    const { tag = "h1", styles } = block.options;
+    return (0, _utils.row)((0, _utils.col)(`<${tag}>${block.value}</${tag}>`), (0, _utils.css)(styles));
 }
 function text(block) {
-    return (0, _utils.row)((0, _utils.col)(`<p>${block.value}</p>`));
+    return (0, _utils.row)((0, _utils.col)(`<p>${block.value}</p>`), (0, _utils.css)(block.options.styles));
 }
 function columns(block) {
     const html = block.value.map((0, _utils.col)).join("");
-    return (0, _utils.row)(html);
+    return (0, _utils.row)(html, (0, _utils.css)(block.options.styles));
 }
 function image(block) {
-    return (0, _utils.row)(`<img src="${block.value}" />`);
+    const { imageStyles: is, alt = "", styles } = block.options;
+    return (0, _utils.row)(`<img src="${block.value}" alt="${alt}" style="${is}" />`, (0, _utils.css)(block.options.styles));
 }
 const templates = {
     title,
@@ -711,11 +749,16 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "row", ()=>row);
 parcelHelpers.export(exports, "col", ()=>col);
-function row(content) {
-    return `<div class="row">${content}</div>`;
+parcelHelpers.export(exports, "css", ()=>css);
+function row(content, styles = "") {
+    return `<div class="row" style="${styles}">${content}</div>`;
 }
 function col(content) {
     return `<div class="col-sm">${content}</div>`;
+}
+function css(styles = {}) {
+    const toString = (key)=>`${key}: ${styles[key]}`;
+    return Object.keys(styles).map(toString).join(";");
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"clPKd":[function() {},{}]},["igKGj","8lqZg"], "8lqZg", "parcelRequire39dc")
