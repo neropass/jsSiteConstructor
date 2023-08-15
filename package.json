@@ -4,7 +4,7 @@
   "description": "js pure app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "parcel ./src/index.html -p 4200 --open"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/neropass/jsSiteConstructor#readme",
   "devDependencies": {
-    "parcel": "^1.12.4"
+    "parcel": "^2.9.3"
   }
 }
