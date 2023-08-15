@@ -575,50 +575,15 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"8lqZg":[function(require,module,exports) {
 var _model = require("./model");
+var _templates = require("./templates");
+var _mainCss = require("./styles/main.css");
 const site = document.querySelector("#site");
 (0, _model.model).forEach((block)=>{
-    let html = "";
-    if (block.type === "title") html = title(block);
-    else if (block.type === "text") html = text(block);
-    else if (block.type === "columns") html = columns(block);
-    else if (block.type === "image") html = image(block);
-    site.insertAdjacentHTML("beforeend", html);
+    const toHTML = (0, _templates.templates)[block.type];
+    site.insertAdjacentHTML("beforeend", toHTML(block));
 });
-function title(block) {
-    return `
-    <div class="row">
-      <div class="col-sm">
-        <h1>${block.value}</h1>
-      </div>
-    </div>
-  `;
-}
-function text(block) {
-    return `
-    <div class="row">
-      <div class="col-sm">
-        <p>${block.value}</p>
-      </div>
-    </div>
-  `;
-}
-function columns(block) {
-    const html = block.value.map((item)=>`<div class="col-sm">${item}</div>`);
-    return `
-    <div class="row">
-      ${html.join("")}
-    </div>
-  `;
-}
-function image(block) {
-    return `
-    <div class="row">
-      <img src="${block.value}" />
-    </div>
-  `;
-}
 
-},{"./model":"dEDha"}],"dEDha":[function(require,module,exports) {
+},{"./model":"dEDha","./templates":"gOO7a","./styles/main.css":"clPKd"}],"dEDha":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "model", ()=>model);
@@ -676,6 +641,50 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["igKGj","8lqZg"], "8lqZg", "parcelRequire39dc")
+},{}],"gOO7a":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "templates", ()=>templates);
+function title(block) {
+    return `
+    <div class="row">
+      <div class="col-sm">
+        <h1>${block.value}</h1>
+      </div>
+    </div>
+  `;
+}
+function text(block) {
+    return `
+    <div class="row">
+      <div class="col-sm">
+        <p>${block.value}</p>
+      </div>
+    </div>
+  `;
+}
+function columns(block) {
+    const html = block.value.map((item)=>`<div class="col-sm">${item}</div>`);
+    return `
+    <div class="row">
+      ${html.join("")}
+    </div>
+  `;
+}
+function image(block) {
+    return `
+    <div class="row">
+      <img src="${block.value}" />
+    </div>
+  `;
+}
+const templates = {
+    title,
+    text,
+    columns,
+    image
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"clPKd":[function() {},{}]},["igKGj","8lqZg"], "8lqZg", "parcelRequire39dc")
 
 //# sourceMappingURL=index.975ef6c8.js.map
